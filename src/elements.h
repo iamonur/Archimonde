@@ -22,6 +22,9 @@ class Application{
     Application(RenderEngine* renderer, int xres, int yres);
     void re_render(); //Re-rendering is a decision that we need to make for us.
 public:
+    void change_screen(Screen* tb_activated);
+    Screen* getScreen(int screenNumber);
+    int getScreenNumber();
     void attach_screen(Screen* tb_attached);
     int get_xres();
     int get_yres();
@@ -39,13 +42,13 @@ typedef struct positon_data{
 }POS_DATA;
 
 struct NoActiveScreenException : public std::exception{
-    const char* what const throw(){
+    const char* what() const throw(){
         return "There is no active screen to render";
     }
-}
+};
 
 struct AppCreateException : public std::exception{
-    const char* what const throw(){
+    const char* what() const throw(){
         return "Wrong parameters or no parameters when needed";
     }
 };

@@ -21,6 +21,21 @@ Application* Application::get_application(){
     return my_instance;
 }
 
+Screen* Application::getScreen(int screenNumber){
+    if(screenNumber > (screens.size()-1)) return NULL;
+    return screens[screenNumber];
+}
+
+int Application::getScreenNumber(){
+    return active_screen;
+}
+
+void Application::change_screen(Screen* tb_activated){
+    int temp = active_screen;
+    for(int i = 0; i < screens.size(); i++) if(tb_activated == screens[i]) active_screen = i;
+    if(temp != active_screen) re_render();
+}
+
 void Application::attach_screen(Screen* tb_attached){
     screens.push_back(tb_attached);
     if(active_screen == -1) active_screen = 0;
